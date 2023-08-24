@@ -10,7 +10,7 @@ interface CustomButtonProps {
 
 const CustomButton: React.FC<CustomButtonProps> = ({ children, colorScheme = "teal", ...props }) => {
   return (
-    <Button colorScheme={colorScheme} width="100%" height="15%" {...props}>
+    <Button colorScheme={colorScheme} width="100%" borderRadius={10} {...props}>
       {children}
     </Button>
   );

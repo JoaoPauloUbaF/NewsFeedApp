@@ -1,8 +1,11 @@
-// src/screens/LoginScreen.tsx
-
 import React, { useState } from 'react';
-import { View, Text, Button, Input, VStack, Box, Center, Alert } from 'native-base';
+import { Text, Button, VStack, Center, Alert, Box, Spacer, ScrollView, KeyboardAvoidingView } from 'native-base';
+import theme from '../styles/theme';
 import { loginUser } from '../services/auth';
+import EmailInput from '../components/EmailInput';
+import PasswordInput from '../components/PasswordInput';
+import CustomButton from '../components/CustomButton';
+import { Platform } from 'react-native';
 
 function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
@@ -19,31 +22,35 @@ function LoginScreen({ navigation }: any) {
   };
 
   return (
-    <Center flex={1}>
-      <VStack space={4} width="80%">
-        <Text fontSize="2xl" mb={5}>Login</Text>
-        <Input
-          placeholder="Email"
-          variant="outline"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Input
-          placeholder="Password"
-          variant="outline"
-          type="password"
-          value={password}
-          onChangeText={setPassword}
-        />
-        <Button onPress={handleLogin}>
-          Login
-        </Button>
-        <Button variant="link" onPress={() => navigation.navigate('Registration')}>
-          Don't have an account? Register
-        </Button>
-        {error && <Alert status="error"><Alert.Icon /><Alert>{error}</Alert></Alert>}
-      </VStack>
-    </Center>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} bgColor={theme.colors.gray[500]}>
+        <Center flex={1} >
+          <Spacer/>
+          <VStack space={"md"} width="80%" flex={1} justifyContent="center">
+            <Center>
+              <Text fontSize={32} fontFamily="Roboto-Bold" mb={"px"}>Login</Text>
+            </Center>
+            <Box flex={0.01} justifyContent="flex-end" mb={5}/>
+            <EmailInput value={email} onChangeText={setEmail} />
+            <PasswordInput value={password} onChangeText={setPassword} />
+            <CustomButton title="Login" onPress={handleLogin} bgColor={theme.colors.primary}>
+                <Text fontFamily="Roboto-Regular" color={'white'}>Login</Text> 
+            </CustomButton>
+            {error && <Alert status="error" width="100%"><Alert.Icon />{error}</Alert>}
+          </VStack>
+          <Box flex={1} justifyContent="flex-end" mb={5}>
+            <Button variant="link" onPress={() => navigation.navigate('Registration')} colorScheme="secondary">
+              <Text fontFamily="Roboto-Regular" color={theme.colors.quaternary}>Don't have an account?
+              <Text fontFamily={"Roboto-Bold"}> Sign Up</Text>
+              </Text>
+            </Button>
+          </Box>
+        </Center>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
