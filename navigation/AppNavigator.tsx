@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginScreen';
 import NewsFeedScreen from '../screens/NewsFeedScreen';
 import RegistrationScreen from '../screens/RegistrationScreen';
+import NewsDetailsScreen from '../screens/NewsDetailsScreen';
 // ... any other screens you have
 
 const Stack = createStackNavigator();
@@ -15,12 +16,13 @@ const Stack = createStackNavigator();
 function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{
+      <Stack.Navigator initialRouteName="NewsFeed" screenOptions={{
         headerShown: false
       }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
         <Stack.Screen name="NewsFeed" component={NewsFeedScreen} />
+        {/* <Stack.Screen name="NewsDetails" component={NewsDetailsScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

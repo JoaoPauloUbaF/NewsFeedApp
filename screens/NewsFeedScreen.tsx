@@ -1,26 +1,52 @@
 // src/screens/NewsFeedScreen.tsx
 
-import React from 'react';
-import { View, Text, VStack, Box, FlatList } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View, Text, VStack, Box, FlatList, Center, Spinner } from 'native-base';
+import NewsCard from '../components/NewsCard';
+import { AppDispatch, RootState } from '../store/store';
+import { fetchNews } from '../store/thunks/newsThunks';
 
-const dummyData = [
-  { id: '1', title: 'Article 1' },
-  { id: '2', title: 'Article 2' },
-  // ... add more dummy articles
-];
+function NewsFeedScreen( { navigation  }: any ) {
+  const dispatch = useDispatch<AppDispatch>();
+  const articles = useSelector((state: RootState) => state.news.articles);
+  const [page, setPage] = useState(1);
+  const loading = useSelector((state: RootState) => state.news.loading);
 
-function NewsFeedScreen() {
+  useEffect(() => {
+    dispatch(fetchNews(page));
+  }, [page]);
+
+  if (loading && articles.length === 0) {
+  return (
+    <Center flex={1}>
+      <Spinner size="lg" />
+    </Center>
+  );
+}
+
   return (
     <Box flex={1} p={4}>
-      <Text fontSize="2xl" mb={5}>News Feed</Text>
+      <Center>
+        <Text fontFamily={'Roboto-Bold'} fontSize="4xl" mb={5}>News</Text>
+      </Center>
+      <Text fontFamily={'Roboto-Bold'} fontSize="2xl" mb={5}>Top Headlines</Text>
       <FlatList
-        data={dummyData}
+        showsVerticalScrollIndicator={false}
+        data={articles}
         renderItem={({ item }) => (
-          <VStack space={3} mt={4}>
-            <Text>{item.title}</Text>
-          </VStack>
+          <NewsCard
+            article={item}
+            onPress={() => {
+              // navigation.navigate('NewsDetails', { article: item });
+            }}
+          />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.title}
+        
+        onEndReached={() => setPage(prevPage => prevPage + 1)}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={() => loading ? <Spinner size="lg" /> : null}
       />
     </Box>
   );
