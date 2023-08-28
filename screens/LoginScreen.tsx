@@ -37,14 +37,14 @@ function LoginScreen({ navigation }: any) {
             <EmailInput value={email} onChangeText={setEmail} />
             <PasswordInput value={password} onChangeText={setPassword} />
             <CustomButton title="Login" onPress={handleLogin} bgColor={theme.colors.primary}>
-                <Text fontFamily="Roboto-Regular" color={'white'}>Login</Text> 
+                <Text fontFamily="Roboto-Regular" color={'white'}>Entrar</Text> 
             </CustomButton>
             {error && <Alert status="error" width="100%"><Alert.Icon />{error}</Alert>}
           </VStack>
           <Box flex={1} justifyContent="flex-end" mb={5}>
             <Button variant="link" onPress={() => navigation.navigate('Registration')} colorScheme="secondary">
-              <Text fontFamily="Roboto-Regular" color={theme.colors.quaternary}>Don't have an account?
-              <Text fontFamily={"Roboto-Bold"}> Sign Up</Text>
+              <Text fontFamily="Roboto-Regular" color={theme.colors.quaternary}>Ainda não possui uma conta?
+              <Text fontFamily={"Roboto-Bold"}> Cadastrar-se</Text>
               </Text>
             </Button>
           </Box>

@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { View, Text, VStack, Box, FlatList, Center, Spinner } from 'native-base';
+import { View, Text, VStack, Box, FlatList, Center, Spinner, Button, IconButton, Icon, HStack, Spacer } from 'native-base';
 import NewsCard from '../components/NewsCard';
 import { AppDispatch, RootState } from '../store/store';
 import { fetchNews } from '../store/thunks/newsThunks';
+import { MaterialIcons } from '@expo/vector-icons';
 
 function NewsFeedScreen( { navigation  }: any ) {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,6 +17,10 @@ function NewsFeedScreen( { navigation  }: any ) {
   useEffect(() => {
     dispatch(fetchNews(page));
   }, [page]);
+
+  const handleLogOut = () => {
+    dispatch({ type: 'auth/logout' });
+  };
 
   if (loading && articles.length === 0) {
   return (
@@ -28,9 +33,17 @@ function NewsFeedScreen( { navigation  }: any ) {
   return (
     <Box flex={1} p={4}>
       <Center>
-        <Text fontFamily={'Roboto-Bold'} fontSize="4xl" mb={5}>News</Text>
+      <HStack>
+      <Spacer/>
+        <Text fontFamily={'Roboto-Bold'} fontSize="4xl" mb={5}>Notícias</Text>
+      <Spacer/>
+      <IconButton
+      icon={<Icon as={MaterialIcons} name="logout" size="sm" color="muted.700" />}
+      onPress={handleLogOut}
+      />
+      </HStack>
       </Center>
-      <Text fontFamily={'Roboto-Bold'} fontSize="2xl" mb={5}>Top Headlines</Text>
+      <Text fontFamily={'Roboto-Bold'} fontSize="2xl" mb={5}>Manchetes principais</Text>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={articles}
@@ -38,7 +51,7 @@ function NewsFeedScreen( { navigation  }: any ) {
           <NewsCard
             article={item}
             onPress={() => {
-              // navigation.navigate('NewsDetails', { article: item });
+              navigation.navigate('NewsDetails', { article: item });
             }}
           />
         )}

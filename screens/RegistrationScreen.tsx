@@ -33,20 +33,20 @@ function RegistrationScreen({ navigation }: any) {
           <Spacer/>
           <VStack space={'md'} width="80%" flex={1} justifyContent="center">
             <Center>
-              <Text  fontSize={32} fontFamily="Roboto-Bold" mb={'px'} color={theme.colors.gray[100]}>Sign Up</Text>
+              <Text  fontSize={32} fontFamily="Roboto-Bold" mb={'px'} color={theme.colors.gray[100]}>Cadastro</Text>
             </Center>
             <Box flex={0.01} justifyContent="flex-end" mb={5}/>
             <EmailInput value={email} onChangeText={setEmail} />
             <PasswordInput value={password} onChangeText={setPassword} />
             <CustomButton title="Sign Up" onPress={handleRegister} bgColor="#000">
-                Sign Up
+                Cadastrar
             </CustomButton>
              {error && <Alert status="error"><Alert.Icon/>{error}</Alert>}
             <Box flex={1} justifyContent={'flex-end'} mb={5}>
               <CustomButton title="Already have an account? Login" variant="link" onPress={() => navigation.navigate('Login')}>
                   <Text style={{color: theme.colors.white}}>
-                    Already have an account?
-                    <Text fontFamily={'Roboto-Bold'} style={{color: theme.colors.black}}> Login</Text>
+                    Já tem uma conta?
+                    <Text fontFamily={'Roboto-Bold'} style={{color: theme.colors.black}}> Fazer Login</Text>
                   </Text>
               </CustomButton>
             </Box>

@@ -34,6 +34,7 @@ export type Article = {
   url: string;
   urlToImage?: string;
   publishedAt: string;
+  content: string;
   source: {
     id?: string;
     name: string;

@@ -1,44 +1,30 @@
-// src/screens/NewsDetailsScreen.tsx
-
 import React from 'react';
-import { Image, Text, VStack, Box, ScrollView } from 'native-base';
 import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { Article } from '../services/newsService';
-
-type RootStackParamList = {
-  NewsFeed: undefined;
-  NewsDetails: { article: Article };
-};
-
-type NewsDetailsScreenRouteProp = RouteProp<RootStackParamList, 'NewsDetails'>;
-type NewsDetailsScreenNavigationProp = StackNavigationProp<RootStackParamList, 'NewsDetails'>;
+import { Box, Image, ScrollView, Text, VStack, Link, HStack } from 'native-base';
+import { RootStackParamList } from '../navigation/types';
 
 type Props = {
-  route: NewsDetailsScreenRouteProp;
-  navigation: NewsDetailsScreenNavigationProp;
+  route: RouteProp<RootStackParamList, 'NewsDetails'>;
 };
 
 const NewsDetailsScreen: React.FC<Props> = ({ route }) => {
   const { article } = route.params;
 
   return (
-    <ScrollView>
+    <ScrollView flex={1} bg="white">
       <Box>
-        <Image
-          source={{ uri: article.urlToImage }}
-          alt="News Image"
-          height={250}
-          width="100%"
-        />
-        <Box position="absolute" bottom={0} p={4} width="100%" bgColor="rgba(0,0,0,0.5)">
-          <Text color="white" fontSize="xl" fontFamily="Roboto-Bold">
-            {article.title}
-          </Text>
+        <Image source={{ uri: article.urlToImage }} alt={article.title} width="100%" height={200} />
+        <Box position="absolute" bottom={0} left={0} right={0} p={4}>
+          <Text fontSize="xl" color="white" fontWeight="bold">{article.title}</Text>
         </Box>
       </Box>
       <VStack p={4} space={3}>
-        <Text fontFamily="Roboto-Regular">{article.description}</Text>
+        <HStack justifyContent="space-between" alignItems="center">
+          <Text fontSize="sm" color="gray.500">{article.source.name}</Text>
+          <Text fontSize="sm" color="gray.500">{new Date(article.publishedAt).toLocaleDateString()}</Text>
+        </HStack>
+        <Text fontSize="md">{article.content}</Text>
+        <Link href={article.url} isExternal color="blue.500" fontSize="sm">Ler artigo completo</Link>
       </VStack>
     </ScrollView>
   );

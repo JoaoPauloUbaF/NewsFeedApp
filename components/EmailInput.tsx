@@ -10,7 +10,7 @@ const EmailInput = (props: any) => {
     <Input
       size={'lg'}
       variant="outline"
-      placeholder="Your Email"
+      placeholder="Seu Email"
       placeholderTextColor={theme.colors.gray[100]}
       {...props}
       InputLeftElement={

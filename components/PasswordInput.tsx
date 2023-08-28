@@ -10,7 +10,7 @@ const PasswordInput = (props: any) => {
     <Input
       variant="outline"
       size={'lg'}
-      placeholder="Password"
+      placeholder="Senha"
       placeholderTextColor={theme.colors.gray[100]}
       type="password"
       {...props}
