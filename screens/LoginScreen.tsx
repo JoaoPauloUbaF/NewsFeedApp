@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccess, authError } from '../store/actions/authActions';
+import { RootState } from '../store/store';
 import { Text, Button, VStack, Center, Alert, Box, Spacer, ScrollView, KeyboardAvoidingView } from 'native-base';
 import theme from '../styles/theme';
 import { loginUser } from '../services/auth';
@@ -8,16 +11,20 @@ import CustomButton from '../components/CustomButton';
 import { Platform } from 'react-native';
 
 function LoginScreen({ navigation }: any) {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const authErrorStr = useSelector((state: RootState) => state.auth.error);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const handleLogin = async () => {
     const result = await loginUser(email, password);
     if (result.success) {
+      dispatch(loginSuccess({ email: email })); // Dispatching login success action
       navigation.navigate('NewsFeed');
     } else {
-      setError(result.error || 'Login failed');
+      dispatch(authError(result.error || 'Login failed')); // Dispatching auth error action
     }
   };
 
@@ -39,7 +46,7 @@ function LoginScreen({ navigation }: any) {
             <CustomButton title="Login" onPress={handleLogin} bgColor={theme.colors.primary}>
                 <Text fontFamily="Roboto-Regular" color={'white'}>Entrar</Text> 
             </CustomButton>
-            {error && <Alert status="error" width="100%"><Alert.Icon />{error}</Alert>}
+            {authErrorStr && <Alert status="error" width="100%"><Alert.Icon />{authErrorStr}</Alert>}
           </VStack>
           <Box flex={1} justifyContent="flex-end" mb={5}>
             <Button variant="link" onPress={() => navigation.navigate('Registration')} colorScheme="secondary">

@@ -17,7 +17,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="NewsFeed" screenOptions={{
+      <Stack.Navigator initialRouteName="Login" screenOptions={{
         headerShown: false
       }}>
         <Stack.Screen name="Login" component={LoginScreen} />
