@@ -37,6 +37,13 @@ O projeto pode utilizar ferramentas de linting para incentivar boas práticas de
 
 Durante o desenvolvimento deste projeto, você pode aprender profundamente sobre o desenvolvimento de aplicativos móveis usando React Native, integração com APIs, gerenciamento de estado com Redux, e práticas de autenticação e registro. A prática de escrever componentes reutilizáveis e gerenciar a navegação em um aplicativo móvel também é um aprendizado valioso.
 
+## Screenshots
+<img src="https://github.com/JoaoPauloUbaF/NewsFeedApp/assets/52152762/d27d7d24-f029-42a1-ac89-3138385e11ab" height="550" width="350"/>
+<img src="https://github.com/JoaoPauloUbaF/NewsFeedApp/assets/52152762/efa04c08-f30c-4b41-bf76-acc805da760e" height="550" width="350"/>
+<img src="https://github.com/JoaoPauloUbaF/NewsFeedApp/assets/52152762/64bf2565-58c6-478e-8e69-242c5d456755" height="550" width="350"/>
+<img src="https://github.com/JoaoPauloUbaF/NewsFeedApp/assets/52152762/852ef1dc-a394-4d20-8dd1-217097f60a0f" height="550" width="350"/>
+
+
 ## Licença
 
 Licença MIT
